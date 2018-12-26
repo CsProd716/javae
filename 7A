@@ -1,0 +1,51 @@
+//Main.java
+package que7;
+import java.util.Scanner;
+
+class Record{
+	Scanner t = new Scanner(System.in);
+	String name[] = new String[10];
+	int rank[] = new int[10];
+	Record() {
+		readValues();
+		}
+	public void readValues() {
+		for(int i=0;i<10;i++) {
+			System.out.println("Enter Name and Rank of Student"+i);
+			name[i] = t.next();
+			rank[i] = t.nextInt();
+		}
+	}
+	public void display() {
+		for(int i=0;i<10;i++) {
+			System.out.println("Name: "+name[i]+"->Rank "+rank[i]);
+		}
+	}
+}
+
+class Rank extends Record{
+	int index;
+	Rank(){
+		super();
+		index = 0;
+	}
+	public void highest() {
+		for(int i=1;i<10;i++) {
+			if(super.rank[i]<super.rank[index])
+				index = i;
+		}
+	}
+	public void display() {
+		super.display();
+		System.out.println("Highest Rank:\nName: "+name[index]+"->Rank "+rank[index]);
+	}
+}
+
+
+public class Main {
+	public static void main(String[] args) {
+		Rank r = new Rank();
+		r.highest();
+		r.display();
+	}
+}
