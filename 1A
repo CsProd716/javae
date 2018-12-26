@@ -1,0 +1,95 @@
+//Students.java
+package que1a;
+
+public interface Students {
+	String getvalue();	
+}
+
+//Department.java
+package que1a;
+
+public interface Department {
+	float getattendence();
+}
+
+//Exam.java
+package que1a;
+
+public interface Exam extends Department,Students{
+	public float calattendance();
+	boolean eligible();
+}
+
+//Main.java
+package que1a;
+import java.util.Scanner;
+class check implements Exam{
+	int sno;
+	String sname;
+	String Class;
+	float attendance;
+	float perc;
+	int NoOfClasses;
+	check(int s,String name,String c,float attend,int n) {
+		sno = s;
+		sname = name;
+		Class = c;
+		attendance = attend;
+		NoOfClasses = n;
+	}
+	
+	@Override
+	public String getvalue() {
+		return("Student Details\nNumber:" + sno + "\nName:" + sname + "\nClass"+ Class);
+	}
+	@Override
+	public float getattendence() {
+		return perc; 
+	}
+	@Override
+	public float calattendance() {
+		perc = (attendance/NoOfClasses)*100;
+		return perc;
+	}
+	@Override
+	public
+	boolean eligible() {
+		if (perc>=75)
+			return true;
+		else
+			return false;
+	}
+}
+public class Main{
+	public static void main(String[] args) {
+		int no;
+		String name;
+		String cl;
+		int ClassNo;
+		Scanner t = new Scanner(System.in);
+		System.out.println("Give in the details");
+		no = t.nextInt();
+		name = t.next();
+		cl = t.next();
+		float a = t.nextFloat();
+		ClassNo = t.nextInt();
+		if(a>ClassNo) {
+			System.out.println("Attended class more than Total Classes");
+			System.exit(0);
+		}
+		else {
+			check s = new check(no,name,cl,a,ClassNo);
+			s.calattendance();
+			if(s.eligible()) {
+				System.out.println("Eligible!");
+				System.out.println(s.getvalue());
+			}
+			else {
+				System.out.println("Not Eligible!");
+				System.out.println(s.getvalue());
+			}
+		}
+		
+		
+	}
+}
