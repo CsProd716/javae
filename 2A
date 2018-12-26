@@ -1,0 +1,120 @@
+//Students package
+//studnets.java
+package Students;
+
+public class students {
+		String USN,Dept_Name;
+		float Java_marks,CN_marks,OS_marks,SGPA;
+		int Java_cred,CN_cred,OS_cred;
+//--------------------------------------------------------------
+		private int sub_gpa(float x){
+			if(x >=90)
+				return (10);
+			else if(x>=80 && x<89)
+				return (9);
+			else if(x>=70 && x<79)
+				return (8);
+			else if(x>=60 && x<69)
+				return (7);
+			else if(x>=50 && x<59)
+				return (6);
+			else if(x>=40 && x<49)
+				return (5);
+			else if(x>=30 && x<39)
+				return (4);
+			else if(x>=20 && x<29)
+				return (3);
+			else if(x>=10 && x<19)
+				return (2);
+			else
+				return (1);
+		}
+		private float cal_sgpa(float a,int a1,float b,int b1,float c,float c1){
+			return((sub_gpa(a)*a1)+(sub_gpa(b)*b1)+(sub_gpa(c)*c1))/((a1+b1+c1));
+		}
+		
+		public students(String a,String b,float c,float d,float e,int c1,int d1,int e1){
+			USN = a;
+			Dept_Name = b;
+			Java_marks = c;
+			CN_marks = d;
+			OS_marks = e;
+			SGPA = cal_sgpa(c,c1,d,d1,e,e1);
+		}
+		
+		public void display() {
+			System.out.println("USN: "+USN+"\nDepartment "+Dept_Name+"\nSub1 Marks "+Java_marks+"\nSub2 Marks "+CN_marks+"\nSub3 Marks "+OS_marks+"\nSGPA"+SGPA);
+		}
+		
+}
+
+//Staff package
+//staff.java
+package Staff;
+
+public class staff {
+	String Staff_ID,Staff_Name,Designation,Subject;
+	public staff(String a,String b,String c,String d){
+		Staff_ID = a;
+		Staff_Name = b;
+		Designation = c;
+		Subject = d;
+	}
+	public void display() {
+		System.out.println("ID: "+Staff_ID+"\nName: "+Staff_Name+"\nDesignation "+Designation+"\nSubjects handled: "+Subject);
+	}
+}
+
+
+//Default
+//Main.java
+import java.util.Scanner;
+
+import Students.students;
+import Staff.staff;
+public class Main {
+	@SuppressWarnings("unused")
+	public static void main(String[] args) {
+		@SuppressWarnings("resource")
+		Scanner t = new Scanner(System.in);
+		
+		System.out.println("MENU:\n1.Display Student Details\n2.Staff Details\n");
+		int i = t.nextInt();
+		if(i==1) {
+			System.out.println("Enter Student 1 Details");
+			students s1 = new students(t.next(),t.next(),t.nextFloat(),t.nextFloat(),t.nextFloat(),t.nextInt(),t.nextInt(),t.nextInt());
+			
+			System.out.println("Enter Student 2 Details");
+			students s2 = new students(t.next(),t.next(),t.nextFloat(),t.nextFloat(),t.nextFloat(),t.nextInt(),t.nextInt(),t.nextInt());
+			
+			System.out.println("Enter Student 3 Details");
+			students s3 = new students(t.next(),t.next(),t.nextFloat(),t.nextFloat(),t.nextFloat(),t.nextInt(),t.nextInt(),t.nextInt());
+			
+			System.out.println("Student Details\n");
+			s1.display();
+			s2.display();
+			s3.display();
+		}
+		else {
+			System.out.println("Enter Staff 1 Details");
+			staff s1 = new staff(t.next(),t.next(),t.next(),t.next());
+			
+			System.out.println("Enter Staff 2 Details");
+			staff s2 = new staff(t.next(),t.next(),t.next(),t.next());
+			
+			System.out.println("Enter Staff 3 Details");
+			staff s3 = new staff(t.next(),t.next(),t.next(),t.next());
+			
+			System.out.println("Staff Details\n");
+			s1.display();
+			s2.display();
+			s3.display();
+		}
+			
+	}
+}
+
+
+
+
+
