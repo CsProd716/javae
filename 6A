@@ -1,0 +1,45 @@
+//Main.java
+package que6;
+import java.util.Scanner;
+@SuppressWarnings("serial")
+class AgeOutOfRangeException extends Exception{
+	public String toString() {
+		return ("Age Exception");
+	}
+}
+@SuppressWarnings("serial")
+class LowCGpaException extends Exception{
+	public String toString() {
+		return ("Low CGPA");
+	}
+}
+@SuppressWarnings("unused")
+public class Main {
+	public static void main(String[] args) {
+		Scanner t = new Scanner(System.in);
+		int age;
+		float cgpa;
+		System.out.println("Enter your AGE:");
+		age = t.nextInt();
+		System.out.println("Enter your CGPA:");
+		cgpa = t.nextFloat();
+		int i = 0;
+		try {
+			if(age>25)
+				throw new AgeOutOfRangeException();
+		}catch(AgeOutOfRangeException e) {
+			System.out.println(e);
+			i = 1;
+		}
+		try {
+			if(cgpa<8)
+				throw new LowCGpaException();
+		}catch(LowCGpaException e) {
+			System.out.println(e);
+			i = 1;
+		}
+		if(i==0)
+			System.out.println("Your application is accepted and is under study");
+	}
+
+}
