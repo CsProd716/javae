@@ -1,0 +1,81 @@
+//Main.java
+package que3;
+import java.util.Scanner;
+@SuppressWarnings({ "unused", "serial" })
+class NameException extends Exception{
+	public String toString(){
+		return ("Not a Name");
+	}
+}
+@SuppressWarnings("serial")
+class AgeException extends Exception{
+	public String toString() {
+		return ("Age Limit Exceded");
+	}
+}
+@SuppressWarnings("unused")
+class Emp_Details{
+	String name;
+	int age;
+	Emp_Details(String s,int a){
+		name = s;
+		age = a;
+	}
+}
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter your name: ");  
+		String name = sc.next();
+		System.out.println("Enter your age: ");  
+		int age = sc.nextInt();
+		int x=1, y=1; 
+		try
+		{
+			try
+			{
+				int k = Integer.parseInt(name);
+			}
+
+			catch(Exception e)
+			{
+				x=0;
+			}
+			if(x==1)
+				throw new NameException();
+		}
+
+		catch(NameException e)
+		{
+			System.out.println(e);
+			y=0;
+		}
+
+
+		try
+		{
+			if(age>50)
+			{
+				throw new AgeException();
+			}
+		}
+		catch(AgeException e)
+		{
+			System.out.println(e);
+			y=0;
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			y=0;
+		}
+
+		if(y==1)
+		{
+			new Emp_Details(name,age);
+			System.out.println("Object created successfully! \n Name: "+ name+" \n Age: "+ age);
+		}
+				
+	}
+}
