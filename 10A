@@ -1,0 +1,64 @@
+//trigno.java
+package AdvMath;
+
+public class trigno {
+	double x;
+	public trigno(double a){
+		x = a;
+	}
+	public double calculate() {
+		return (Math.sin(x)+Math.cos(x)+Math.tan(x));
+	}
+}
+
+//triplets.java
+package AdvMath;
+
+public class triplets {
+	int m,n,k,a,b,c,limit;
+	
+	public triplets(int l){
+		m = 2;
+		n = 1;
+		limit = l;
+	}
+	public void produce() {
+		while(c<limit) {
+			for(n=1;n<m;n++) {
+				a = m*m - n*n;
+				b = 2*m*n;
+				c = m*m + n*n;
+				if(c>limit) 
+					break;
+				System.out.println(a+"\t"+b+"\t"+c);
+				
+			}	
+			m++;
+		}
+	}
+}
+
+//Main.java
+import AdvMath.trigno;
+import AdvMath.triplets;
+import java.util.Scanner;
+public class Main {
+	public static void main(String[] args) {
+		Scanner t = new Scanner(System.in);
+		System.out.println("1.Trigno Sum/n2.Pythagoran Triplets");
+		int i = t.nextInt();
+		if(i==1) {
+			System.out.println("Enter value");
+			double x = t.nextDouble();
+			trigno a = new trigno(x);
+			System.out.println(a.calculate());
+		}
+		else if(i ==2) {
+			System.out.println("Enter the limit");
+			int lim = t.nextInt();
+			triplets a = new triplets(lim);
+			a.produce();
+		}
+	}
+}
+
