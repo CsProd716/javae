@@ -1,0 +1,78 @@
+//Main.java
+package que8;
+
+class wait_eat{
+  int n;
+  boolean v = false;
+  synchronized public int eat(){
+    while(!v){
+      try{
+        wait();
+      }catch(Exception e){
+        System.out.println(e);
+      }
+    }
+    System.out.println("Got meal no: "+n);
+    v = false;
+    notify();
+    return n;
+  }
+  synchronized public void wait1(int n){
+    while(v){
+      try{
+        wait();
+      }catch(Exception e){
+        System.out.println(e);
+      }
+    }
+    this.n = n;
+    System.out.println("Put meal no: "+n);
+    v = true;
+    notify();
+  }
+}
+
+class t1 extends Thread{
+  wait_eat p;
+  t1(wait_eat m){
+    p = m;
+    this.start();
+  }
+  public void run(){
+    int i = 0;
+    while(true){
+      p.wait1(i++);
+      try{
+        sleep(1000);
+      }catch(InterruptedException e){
+        e.printStackTrace();
+      }
+    }
+  }
+}
+
+class t2 extends Thread{
+  wait_eat p;
+  t2(wait_eat m){
+    p = m;
+    this.start();
+  }
+  public void run(){
+    while(true){
+      p.eat();
+      try{
+        sleep(1000);
+      }catch(InterruptedException e){
+        e.printStackTrace();
+      }
+    }
+  }
+}
+
+public class Main{
+  public static void main(String[] args){
+    wait_eat p = new wait_eat();
+    new t1(p);
+    new t2(p);
+  }
+}
