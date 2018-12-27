@@ -25,18 +25,21 @@ public class Main {
 		cgpa = t.nextFloat();
 		int i = 0;
 		try {
-			if(age>25)
+			if(age<=25){
+				try {
+					if(cgpa<8)
+						throw new LowCGpaException();
+				}catch(LowCGpaException e) {
+					System.out.println(e);
+					i = 1;
+				}
+			}
+			else{
 				throw new AgeOutOfRangeException();
+			}
 		}catch(AgeOutOfRangeException e) {
-			System.out.println(e);
-			i = 1;
-		}
-		try {
-			if(cgpa<8)
-				throw new LowCGpaException();
-		}catch(LowCGpaException e) {
-			System.out.println(e);
-			i = 1;
+				System.out.println(e);
+				i = 1;
 		}
 		if(i==0)
 			System.out.println("Your application is accepted and is under study");
