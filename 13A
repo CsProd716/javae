@@ -1,0 +1,78 @@
+//Main.java
+
+package que13;
+import java.util.Scanner;
+
+abstract class Reservation{
+	abstract public boolean reserve(int seats,String typeOfSeat);
+	abstract public int getAvailableSeats();
+}
+
+class ReserveTrain extends Reservation{
+	int seats;
+	String typeOfSeat;
+	static int availt = 100;
+	public boolean reserve(int s,String t) {
+		this.seats = s;
+		this.typeOfSeat = t;
+		if(seats<availt) {
+			availt -=  seats;
+			return true;
+		}
+		else return false;
+	}
+	public int getAvailableSeats() {
+		return availt;
+	}
+}
+class ReserveBus extends Reservation{
+	int seats;
+	String typeOfSeat;
+	static int availb = 50;
+	public boolean reserve(int s,String t) {
+		this.seats = s;
+		this.typeOfSeat = t;
+		if(seats<availb) {
+			availb -=  seats;
+			return true;
+		}
+		else return false;
+	}
+	public int getAvailableSeats() {
+		return availb;
+	}
+}
+
+@SuppressWarnings("unused")
+public class Main {
+	public static void main(String[] args) {
+		Scanner t = new Scanner(System.in);
+		ReserveTrain rt = new ReserveTrain();
+		ReserveBus rb = new ReserveBus();
+		while(true) {
+			System.out.println("Do you want to book seat in Train(1) or Bus(2)?");
+			int i = t.nextInt();
+			
+			if(i==1 && rt.availt>0) {
+				System.out.println("Enter Seats to be reserved in train");
+				if(rt.reserve(t.nextInt(), t.next()))
+					System.out.println("Seats booked");
+				else
+					System.out.println("Not Enough seats available");
+				System.out.println("Available Seats in train: "+rt.getAvailableSeats());
+			}
+			
+			else if(i==2 && rb.availb>0) {
+				System.out.println("Enter Seats to be reserved in bus");
+				if(rb.reserve(t.nextInt(), t.next()))
+					System.out.println("Seats booked");
+				else
+					System.out.println("Not Enough seats available");
+				System.out.println("Available Seats in bus: "+rb.getAvailableSeats());
+			}
+			else {
+				System.out.println("No Seats availabe for the Selection");
+			}
+		}	
+	}
+}
