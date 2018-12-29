@@ -1,0 +1,57 @@
+import java.sql.*;
+import java.util.*;
+import com.mysql.jdbc.*;
+
+public class q1b{
+  public static void main(String[] args){
+    Scanner t = new Scanner(System.in);
+    Connection con = null;
+    try{
+      Class.forName("com.sql.jdbc.Driver");
+      con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","");
+      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+      Sting sql = "CREATE TABLE DEPARTMENT(Dept_ID varchar(10) primary key,Name varchar(255),Year_Established int,Head_Name varchar(255),No_of_Employees int)";
+      stmt.executeQuery(sql);
+      ResultSet rs;
+      String query = "imsert into DEPARTMENT values(?,?,?,?,?)";
+      PreparedStatement p = con.prepareStatement(query);
+      String depid,name,hod;
+      int num,date,n;
+      System.out.println("Enter no of tuples:");
+      n = t.nextInt();
+      for(int i=0;i<n;i++){
+        System.out.println("Enter Department ID:");
+        depid = t.next();
+        System.out.println("Enter Department Name:");
+        name = t.next();
+        System.out.println("Enter Department Year of Eshtablishment:");
+        date = t.nextInt();
+        System.out.println("Enter Department HOD:");
+        hod = t.next();
+        System.out.println("Enter Department no of employees:");
+        num = t.nextInt();
+        p.setInt(5,num);
+        p.setString(1,depid);
+        p.setString(2,name);
+        p.setInt(3,date);
+        p.setString(4,hod);
+      }
+      query = "Select No_of_Employees from DEPARTMENT where name='CSE'";
+      rs = stmt.executeQuery(query);
+      rs.next();
+      System.out.println(" No of employees in cse department: "+ rs.getInt("No_of_Employees"));
+      
+      query = "select Name,Dept_ID from DEPARTMENT where Year_Established=2010";
+      rs = stmt.executeQuery(query);
+      while(rs.next()){
+        name=rs.getString("Name");
+				depid=rs.getInt("Dept_id");
+	      System.out.println("\n Name: "+name+"\n Dept_id: "+depid );
+      }
+      stmt.close();
+      con.close();
+    }catch(Exception e){
+      e.printStackTrace(); 
+    }   
+  }
+}
