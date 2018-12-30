@@ -1,0 +1,33 @@
+import java.sql.*;
+import java.util.*;
+
+public class Main{
+  public static void main(String[] args){
+    Scanner t = new Scanner(System.in);
+    Connection con = null;
+    String id,name;
+    int balance,withdrawn,amount,n;
+    try{
+      Class.forName("com.mysql.java.Driver");
+      con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","");
+      Result rs;
+      String query;
+      Statement stmt = con.createStatement();
+      con.setAutoCommit(false);
+      Savepoint sp1 = con.setSavepoint();
+      while(true){
+        Savepoint sp2 = con.setSavepoint();
+        System.out.println("1.Withdrawal\n2.Deposit\n3.Balance Check\n4.Exit");
+        n = t.nextInt();
+        switch(n){
+          case 1:
+            query = "";
+          
+        }
+      }
+    }catch(Exception e){
+      e.printStackTrace();
+    }
+      
+  }
+}
